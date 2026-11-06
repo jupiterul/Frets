@@ -1,0 +1,82 @@
+
+ body{
+   font-family: "shrikhand";
+   color: 6361F2;
+   background-color: #A5A3FF;
+ }
+ @font-face{
+   font-family: "shrikhand";
+   src:url("fonts/Shrikhand-Regular.ttf") format("truetype");
+   font-weight: normal;
+ }
+ #fretboard{
+   position: relative;
+   display: grid;
+   grid-template-columns: var(--fret-columns);
+   grid-template-rows: repeat(6, 40px);
+   width: 100%;
+   background-color: lavender;
+   cursor: pointer;
+ }
+ #fretboard>div{
+    border: 1px solid slateblue;
+ }
+ #fretboard>div:not(#dots){
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+
+/*not(#dots) fara sa afecteze divul dots*/
+
+ #dots{
+   display: grid;
+   grid-template-rows: repeat(6, 40px);
+   grid-template-columns: var(--fret-columns);
+   position: absolute;
+   inset: 0;
+   pointer-events: none;
+   /*lasa mouseul sa treaca peste fara sa afecteze*/
+ }
+ #dots>div{
+   grid-row: 1/7;
+   align-self: center;
+   justify-self: center;
+   width: 15px;
+   height: 15px;
+   background-color: #FFB86B;
+   border-radius: 50%;
+ }
+
+[data-fret="0"]::before{
+   content: attr(data-openstring);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+   height: 100%;
+   background-color: #4846C5;
+   color: #E9E8FF;
+
+}
+:root {
+   --fret-columns:7.346% 6.934% 6.545% 6.177% 5.831% 5.503% 5.194% 4.903% 4.628% 4.368% 4.123% 3.891% 3.673% 3.467% 3.272% 3.089% 2.915% 2.752% 2.597% 2.451% 2.314% 2.184% 2.061% 1.946% 1.836%;
+}
+
+#startbutton {
+   background-color: #4846C5;
+   color: #E9E8FF;
+   border: none;
+   border-radius: 5px;
+   padding: 10px 30px;
+   font-size: 15px;
+   font-family: "shrikhand";
+   cursor: pointer;
+   display: block;
+   margin: 20px auto;
+}
+
+#notesinfo{
+   display: block;
+   text-align: center;
+}
