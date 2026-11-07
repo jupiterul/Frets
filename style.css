@@ -17,14 +17,21 @@
    width: 100%;
    background-color: lavender;
    cursor: pointer;
+   -webkit-user-select: none;
+   -webkit-touch-callout: none;
+   user-select: none;
+   -webkit-tap-highlight-color: transparent;
+   z-index: 1;
  }
  #fretboard>div{
-    border: 1px solid slateblue;
+    border: none;
  }
  #fretboard>div:not(#dots){
    display: flex;
    justify-content: center;
    align-items: center;
+   border-right: 2px solid slateblue;
+   z-index: 2;
  }
 
 /*not(#dots) fara sa afecteze divul dots*/
@@ -44,7 +51,7 @@
    justify-self: center;
    width: 15px;
    height: 15px;
-   background-color: #FFB86B;
+   background-color: #3423cc;
    border-radius: 50%;
  }
 
@@ -61,7 +68,8 @@
 }
 :root {
    --fret-columns:7.346% 6.934% 6.545% 6.177% 5.831% 5.503% 5.194% 4.903% 4.628% 4.368% 4.123% 3.891% 3.673% 3.467% 3.272% 3.089% 2.915% 2.752% 2.597% 2.451% 2.314% 2.184% 2.061% 1.946% 1.836%;
-}
+   --open-string-fret-width: 7.346%;
+  }
 
 #startbutton {
    background-color: #4846C5;
@@ -79,4 +87,32 @@
 #notesinfo{
    display: block;
    text-align: center;
+}
+
+#fretboard::before{
+  content: "";
+  position: absolute;
+  inset:0 0 0 var(--open-string-fret-width);
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    slateblue 0px,
+    slateblue 2px,
+    transparent 2px,
+    transparent 40px
+  );
+  background-position: 0 20px;
+}
+
+#fretboard::after{
+  content:"";
+  position: absolute;
+  inset: 0 0 0 6.934%;
+  width: 13px;
+  background-color: rgb(42, 26, 148);
+
+}
+
+.selected{
+  background: radial-gradient(circle, rgb(200, 208, 252) 13px, transparent 10px);
 }

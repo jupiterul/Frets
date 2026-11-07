@@ -52,8 +52,9 @@ fretboard.addEventListener("click",function(event){
     let clickedfret=event.target.dataset.fret;
 
     clickednote = fretboardmatrix[clickedstring][clickedfret];
-    if(clickedfret!=0)
+    if(clickedfret!=0){
     event.target.textContent = clickednote;
+    event.target.classList.add("selected");}
 
     if (checkanswer(clickednote))
         answer.innerHTML = "Right";
