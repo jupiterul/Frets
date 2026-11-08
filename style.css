@@ -17,7 +17,7 @@ h1:hover {
 
  @font-face{
    font-family: "shrikhand";
-   src:url("fonts/Shrikhand-Regular.ttf") format("truetype");
+   src:url("assets/fonts/Shrikhand-Regular.ttf") format("truetype");
    font-weight: normal;
  }
  #fretboard{
