@@ -65,8 +65,8 @@ function clickednoteonfretboard(event){
     if (checkanswer(clickednote)){
         selectednote.innerHTML = fretboardmatrix[clickedstring][clickedfret] + " string " + string[clickedstring] + " fret " + clickedfret;
         showmessage("Right")
-        setTimeout(function(){answer.innerHTML="";}, 1000);
-        setTimeout(function(){selectednote.innerHTML="";}, 1000);
+        setTimeout(function(){answer.innerHTML="";}, dissapeardelay);
+        setTimeout(function(){selectednote.innerHTML="";}, dissapeardelay);
         score++;
         scoredisplay.innerHTML="Current score: " + score + "<br><span style='color:white'>Keep going!</span>";
         randomnotegenerating(event);
@@ -74,18 +74,20 @@ function clickednoteonfretboard(event){
         else{
         selectednote.innerHTML = fretboardmatrix[clickedstring][clickedfret] + " string " + string[clickedstring] + " fret " + clickedfret;
         showmessage("Wrong")
-        setTimeout(function(){answer.innerHTML="";}, 1000);
+        setTimeout(function(){answer.innerHTML="";}, dissapeardelay);
         score=0;
         usednotepositions=[];
         scoredisplay.innerHTML=score;
-        setTimeout(resetfretboard, 1000);
-        setTimeout(function(){randomnotedisplay.style.display="none"},1000);
-        setTimeout(function(){selectednote.innerHTML="";}, 1000);
-        setTimeout(function(){scoredisplay.innerHTML="";}, 1000);
+        setTimeout(resetfretboard, dissapeardelay);
+        setTimeout(function(){randomnotedisplay.style.display="none"},dissapeardelay);
+        setTimeout(function(){selectednote.innerHTML="";}, dissapeardelay);
+        setTimeout(function(){scoredisplay.innerHTML="";}, dissapeardelay);
         gamestarted=false;
         startbutton.disabled=false;
         return;
 }}
+
+let dissapeardelay = 1500;
 
 function showmessage(message){
     answer.innerHTML=message;
