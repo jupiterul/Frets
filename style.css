@@ -4,6 +4,17 @@
    color: 6361F2;
    background-color: #A5A3FF;
  }
+
+ h1{
+  font-size: 40px;
+  font-weight: 100;
+    transition: transform 0.4s ease-in-out;
+ }
+
+h1:hover {
+    transform: rotateX(1deg) rotateY(25deg) scale(1.1);
+}
+
  @font-face{
    font-family: "shrikhand";
    src:url("fonts/Shrikhand-Regular.ttf") format("truetype");
@@ -12,9 +23,10 @@
  #fretboard{
    position: relative;
    display: grid;
+   margin: auto;
    grid-template-columns: var(--fret-columns);
    grid-template-rows: repeat(6, 40px);
-   width: 100%;
+   width: 98%;
    background-color: lavender;
    cursor: pointer;
    -webkit-user-select: none;
@@ -30,12 +42,23 @@
    display: flex;
    justify-content: center;
    align-items: center;
-   border-right: 2px solid slateblue;
    z-index: 2;
  }
 
 /*not(#dots) fara sa afecteze divul dots*/
 
+ #fretboard>div[data-fret]:not([data-fret="0"]){
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-right: 2px solid slateblue;
+   z-index: 2;
+   transition: font-size 0.3s ease-out ;
+ }
+
+#fretboard>div[data-fret]:not([data-fret="0"]):hover{
+ font-size: 1.5em;
+}
  #dots{
    display: grid;
    grid-template-rows: repeat(6, 40px);
@@ -45,7 +68,7 @@
    pointer-events: none;
    /*lasa mouseul sa treaca peste fara sa afecteze*/
  }
- #dots>div{
+ #dots>div:not(.dot1){
    grid-row: 1/7;
    align-self: center;
    justify-self: center;
@@ -54,6 +77,19 @@
    background-color: #3423cc;
    border-radius: 50%;
  }
+
+ /*mai jos e spatiu intre dots si [ pentru ca arata ca ce urmeaza e descendent, regula tampita*/
+.dot1{
+  grid-row: 1/7;
+   align-self: center;
+   justify-self: center;
+   width: 15px;
+   height: 240px;
+     background:
+        radial-gradient(circle, #3423cc 7px, transparent 8px) 0 75px / 15px 15px no-repeat,
+        radial-gradient(circle, #3423cc 7px, transparent 8px) 0 150px / 15px 15px no-repeat;
+}
+
 
 [data-fret="0"]::before{
    content: attr(data-openstring);
@@ -64,14 +100,26 @@
    height: 100%;
    background-color: #4846C5;
    color: #E9E8FF;
+  transition: font-size 0.3s ease;
+}
+
+[data-fret="0"]:hover::before{
+  font-size: 1.5em;
 
 }
+
 :root {
-   --fret-columns:7.346% 6.934% 6.545% 6.177% 5.831% 5.503% 5.194% 4.903% 4.628% 4.368% 4.123% 3.891% 3.673% 3.467% 3.272% 3.089% 2.915% 2.752% 2.597% 2.451% 2.314% 2.184% 2.061% 1.946% 1.836%;
-   --open-string-fret-width: 7.346%;
+   --fret-columns:5%
+    7.1096% 6.7107% 6.3334% 5.9786%
+    5.6423% 5.3255% 5.0271% 4.7452%
+    4.4786% 4.2274% 3.9895% 3.7660%
+    3.5548% 3.3548% 3.1672% 2.9888%
+    2.8217% 2.6628% 2.5131% 2.3726%
+    2.2393% 2.1132% 1.9953% 1.8825%;
+   --open-string-fret-width: 5%;
   }
 
-#startbutton {
+#startbutton{
    background-color: #4846C5;
    color: #E9E8FF;
    border: none;
@@ -82,6 +130,11 @@
    cursor: pointer;
    display: block;
    margin: 20px auto;
+   transition: transform 0.2s ease-in-out;
+}
+
+#startbutton:not(:disabled):hover{
+  transform: scale(1.1);
 }
 
 #notesinfo{
@@ -92,27 +145,36 @@
 #fretboard::before{
   content: "";
   position: absolute;
-  inset:0 0 0 var(--open-string-fret-width);
+  inset:0 0 0 5%;
   pointer-events: none;
-  background: repeating-linear-gradient(
-    to bottom,
-    slateblue 0px,
-    slateblue 2px,
-    transparent 2px,
-    transparent 40px
-  );
-  background-position: 0 20px;
+  background:
+    linear-gradient(slateblue, slateblue) 0 20px / 100% 1px no-repeat,
+    linear-gradient(slateblue, slateblue) 0 60px / 100% 1.5px no-repeat,
+    linear-gradient(slateblue, slateblue) 0 100px / 100% 2px no-repeat,
+    linear-gradient(slateblue, slateblue) 0 140px / 100% 2.5px no-repeat,
+    linear-gradient(slateblue, slateblue) 0 180px / 100% 3px no-repeat,
+    linear-gradient(slateblue, slateblue) 0 220px / 100% 4px no-repeat;
+ 
 }
 
 #fretboard::after{
   content:"";
   position: absolute;
-  inset: 0 0 0 6.934%;
+  inset: 0 0 0 5%;
   width: 13px;
   background-color: rgb(42, 26, 148);
-
 }
 
 .selected{
   background: radial-gradient(circle, rgb(200, 208, 252) 13px, transparent 10px);
+}
+
+#fretboard>div{
+  transition: opacity 0.5 ease;
+}
+
+#score{
+  position: fixed;
+  top:10px;
+  right:10px;
 }

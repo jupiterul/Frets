@@ -44,25 +44,64 @@ fretboard.innerHTML = fretboardmatrixhtml;
 let selectednote =  document.getElementById("selectednote")
 let clickednote;
 
-fretboard.addEventListener("click",function(event){
+function clickednoteonfretboard(event){
     if (gamestarted==false)
         return;
 
     let clickedstring=event.target.dataset.string;
     let clickedfret=event.target.dataset.fret;
 
+    if(usednotepositions.indexOf(clickedstring + ":" + clickedfret)==-1)
+        usednotepositions.push(clickedstring + ":" + clickedfret);
+    else
+         return;
+
     clickednote = fretboardmatrix[clickedstring][clickedfret];
+    
     if(clickedfret!=0){
     event.target.textContent = clickednote;
     event.target.classList.add("selected");}
 
-    if (checkanswer(clickednote))
-        answer.innerHTML = "Right";
-        else
-        answer.innerHTML = "Wrong";
-    
-   selectednote.innerHTML = fretboardmatrix[clickedstring][clickedfret] + " string " + string[clickedstring] + " fret " + clickedfret;
-});
+    if (checkanswer(clickednote)){
+        selectednote.innerHTML = fretboardmatrix[clickedstring][clickedfret] + " string " + string[clickedstring] + " fret " + clickedfret;
+        showmessage("Right")
+        setTimeout(function(){answer.innerHTML="";}, 1000);
+        setTimeout(function(){selectednote.innerHTML="";}, 1000);
+        score++;
+        scoredisplay.innerHTML="Current score: " + score + "<br><span style='color:white'>Keep going!</span>";
+        randomnotegenerating(event);
+    }
+        else{
+        selectednote.innerHTML = fretboardmatrix[clickedstring][clickedfret] + " string " + string[clickedstring] + " fret " + clickedfret;
+        showmessage("Wrong")
+        setTimeout(function(){answer.innerHTML="";}, 1000);
+        score=0;
+        usednotepositions=[];
+        scoredisplay.innerHTML=score;
+        setTimeout(resetfretboard, 1000);
+        setTimeout(function(){randomnotedisplay.style.display="none"},1000);
+        setTimeout(function(){selectednote.innerHTML="";}, 1000);
+        setTimeout(function(){scoredisplay.innerHTML="";}, 1000);
+        gamestarted=false;
+        startbutton.disabled=false;
+        return;
+}}
+
+function showmessage(message){
+    answer.innerHTML=message;
+}
+fretboard.addEventListener("click",clickednoteonfretboard);
+
+let scoredisplay = document.getElementById("score")
+let score = 0;
+
+function resetfretboard(event){
+    let allnotes=fretboard.querySelectorAll("div[data-fret]");
+    for(let note of allnotes){
+        note.textContent="";
+        note.classList.remove("selected");}
+}
+
 /*
 let startbutton = document.getElementById("startbutton")
 startbutton.addEventListener("click",function(event){
@@ -75,10 +114,19 @@ let startbutton = document.getElementById("startbutton")
 let randomnote;
 
 startbutton.addEventListener("click",function(event){
+    startbutton.disabled=true;
     gamestarted=true;
+    resetfretboard();
+    usednotepositions = [];
     randomnote = Math.floor(Math.random()*note.length)
     randomnotedisplay.innerHTML = note[randomnote];
+    randomnotedisplay.style.display="block";
 })
+
+function randomnotegenerating(event){
+    randomnote = Math.floor(Math.random()*note.length)
+    randomnotedisplay.innerHTML = note[randomnote];
+}
 
 let answer = document.getElementById("answer")
 /*
@@ -103,9 +151,16 @@ let dots = document.getElementById("dots");
 
 
 for(let i=0;i<dottedfrets.length;i++){
+    if(dottedfrets[i]!=12){
     let dot = document.createElement("div");
     dots.appendChild(dot);
     dot.dataset.dottedfrets=dottedfrets[i];
-    dot.style.gridColumn=dottedfrets[i]+1;
+    dot.style.gridColumn=dottedfrets[i]+1;}
+    else{
+        let dot1 = document.createElement("div");
+        dots.appendChild(dot1);
+        dot1.classList.add("dot1");
+        dot1.dataset.dottedfrets=dottedfrets[i];
+        dot1.style.gridColumn=dottedfrets[i]+1;
+    }
 }
-
