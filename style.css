@@ -63,7 +63,6 @@ h2{
  }
  #fretboardscroll::-webkit-scrollbar{
   height: 10px; 
-  
  }
   #fretboardscroll::-webkit-scrollbar-thumb{
   background:rgb(42, 26, 148);
