@@ -52,8 +52,30 @@ h2{
    -webkit-tap-highlight-color: transparent;
    z-index: 1;
    border-radius: 4px 0 0 4px;
-   box-shadow: 0 0 15px rgba(72, 70, 197, 0.45)
+   box-shadow: 0 0 15px rgba(72, 70, 197, 0.45);
+   
  }
+
+ @media screen and (max-width: 768px){
+  #fretboardscroll{
+  width: 100%;
+  overflow-x: auto;
+ }
+ #fretboardscroll::-webkit-scrollbar{
+
+  height: 10px;
+ }
+  #fretboardscroll::-webkit-scrollbar-thumb{
+  background:rgb(42, 26, 148);
+  border-radius: 5px;
+ }
+ #fretboard{
+  zoom: 1.1;
+  width: 1000px;
+ }
+ }
+
+
  #fretboard>div{
     border: none;
  }
@@ -93,7 +115,7 @@ h2{
    justify-self: center;
    width: 15px;
    height: 15px;
-   background-color: #3423cc;
+   background-color: var(--dotcolor);
    border-radius: 50%;
  }
 
@@ -105,8 +127,8 @@ h2{
    width: 15px;
    height: 240px;
      background:
-        radial-gradient(circle, #3423cc 7px, transparent 8px) 0 75px / 15px 15px no-repeat,
-        radial-gradient(circle, #3423cc 7px, transparent 8px) 0 150px / 15px 15px no-repeat;
+        radial-gradient(circle, var(--dotcolor) 7px, transparent 8px) 0 75px / 15px 15px no-repeat,
+        radial-gradient(circle, var(--dotcolor) 7px, transparent 8px) 0 150px / 15px 15px no-repeat;
 }
 
 
@@ -136,6 +158,7 @@ h2{
     2.8217% 2.6628% 2.5131% 2.3726%
     2.2393% 2.1132% 1.9953% 1.8825%;
    --open-string-fret-width: 5%;
+   --dotcolor:#efeff1;
   }
 
 #startbutton{
