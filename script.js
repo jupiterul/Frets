@@ -80,13 +80,14 @@ function clickednoteonfretboard(event){
         highscoredisplay.innerHTML='Your best score was: <span style="color: white">' + highscore + '</span>';}
         score=0;
         usednotepositions=[];
-        
-        setTimeout(resetfretboard, dissapeardelay);
-        setTimeout(function(){randomnotedisplay.style.display="none"},dissapeardelay);
-        setTimeout(function(){selectednote.innerHTML="";}, dissapeardelay);
-        setTimeout(function(){scoredisplay.innerHTML="";}, dissapeardelay);
-        gamestarted=false;
+        setTimeout(function(){
+        resetfretboard();
+        randomnotedisplay.style.display="none";
+        selectednote.innerHTML="";
+        scoredisplay.innerHTML="";
         startbutton.disabled=false;
+        },dissapeardelay);
+        gamestarted=false;
         return;
 }}
 
