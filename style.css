@@ -57,6 +57,15 @@ h2{
  }
 
  @media screen and (max-width: 768px){
+  h1{
+    font-size: 50;
+  }
+  h2{
+    font-size:25;
+  }
+  #notesinfo{
+    text-align: right;
+  }
   #fretboardscroll{
   width: 100%;
   overflow-x: auto;
@@ -70,7 +79,12 @@ h2{
  }
  #fretboard{
   zoom: 0.85;
-  width: 1000px;
+  width: 1300px;
+ }
+ #scores{
+  transform: scale(0.8);
+  transform-origin: top left;
+  width: 125%;
  }
  }
 
@@ -112,8 +126,8 @@ h2{
    grid-row: 1/7;
    align-self: center;
    justify-self: center;
-   width: 15px;
-   height: 15px;
+   width: 17px;
+   height: 17px;
    background-color: var(--dotcolor);
    border-radius: 50%;
  }
@@ -123,11 +137,11 @@ h2{
   grid-row: 1/7;
    align-self: center;
    justify-self: center;
-   width: 15px;
+   width: 17px;
    height: 240px;
      background:
-        radial-gradient(circle, var(--dotcolor) 7px, transparent 8px) 0 75px / 15px 15px no-repeat,
-        radial-gradient(circle, var(--dotcolor) 7px, transparent 8px) 0 150px / 15px 15px no-repeat;
+        radial-gradient(circle, var(--dotcolor) 8px, transparent 9px) 0 75px / 17px 17px no-repeat,
+        radial-gradient(circle, var(--dotcolor) 8px, transparent 9px) 0 150px / 17px 17px no-repeat;
 }
 
 
@@ -170,17 +184,12 @@ h2{
    font-family: "shrikhand";
    cursor: pointer;
    display: block;
-   margin: 20px auto;
+   margin: 20px auto 5px;
    transition: transform 0.2s ease-in-out;
 }
 
 #startbutton:not(:disabled):hover{
   transform: scale(1.1);
-}
-
-#notesinfo{
-   display: block;
-   text-align: center;
 }
 
 #fretboard::before{
@@ -214,10 +223,25 @@ h2{
   transition: opacity 0.5 ease;
 }
 
-#score{
-  position: fixed;
-  top:10px;
-  right:10px;
+#notesinfoarea{
+  font-size: 16px;
+  position: relative;
+  margin-top: 5px;
+  min-height: 5px;
+}
+
+#scores{
+  display: flex;
+  margin-bottom: 5px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  min-height: 50px;
+}
+
+#highscore{
+  position: relative;
+  top: 12px;
 }
 
 #selectednote{
@@ -225,11 +249,12 @@ h2{
   top:calc(100% + 10px);
   right:0;
   text-align: right;
+
 }
 
 #randomnotedisplay{
   position: absolute;
-    top: calc(100% + 10px);
+    top: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;

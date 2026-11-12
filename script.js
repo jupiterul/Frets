@@ -75,9 +75,12 @@ function clickednoteonfretboard(event){
         selectednote.innerHTML = fretboardmatrix[clickedstring][clickedfret] + " string " + string[clickedstring] + " fret " + clickedfret;
         showmessage("Wrong")
         setTimeout(function(){answer.innerHTML="";}, dissapeardelay);
+        if(score>highscore){
+        highscore=score;
+        highscoredisplay.innerHTML='Your best score was: <span style="color: white">' + highscore + '</span>';}
         score=0;
         usednotepositions=[];
-        scoredisplay.innerHTML=score;
+        
         setTimeout(resetfretboard, dissapeardelay);
         setTimeout(function(){randomnotedisplay.style.display="none"},dissapeardelay);
         setTimeout(function(){selectednote.innerHTML="";}, dissapeardelay);
@@ -96,6 +99,8 @@ fretboard.addEventListener("click",clickednoteonfretboard);
 
 let scoredisplay = document.getElementById("score")
 let score = 0;
+let highscoredisplay = document.getElementById("highscore")
+let highscore=0;
 
 function resetfretboard(event){
     let allnotes=fretboard.querySelectorAll("div[data-fret]");
