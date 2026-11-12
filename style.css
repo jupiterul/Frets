@@ -235,6 +235,7 @@ h2{
   position: relative;
   margin-top: 5px;
   min-height: 5px;
+  
 }
 
 #scores{
@@ -244,8 +245,15 @@ h2{
   align-items: center;
   font-size: 18px;
   min-height: 50px;
+  
 }
 
+@media screen and (min-width:918px) {
+ #scores{
+    width: 96.04%;
+    margin: 0 auto 5px;
+ }
+}
 #highscore{
   position: relative;
   align-self: flex-end;
