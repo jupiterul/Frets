@@ -1,10 +1,12 @@
 
  body{
    font-family: "montserrat";
-   color: 6361F2;
+   color: #6361F2;
    background-color: #05051a;
    user-select: none;
    -webkit-user-select: none;
+   display: flex;
+   flex-direction: column;
  }
 
  h1{
@@ -21,14 +23,15 @@ h1:hover {
 }
 
 h2{
-  position: relative;
-  top:30px;
+  position: static;
+  top: 10px;
   text-align: center;
-  color:rgb(147, 147, 255);
+  color:#ffffff;
   font-weight: 400;
   font-size: 30px;
-  text-shadow: 0 0 15px rgba(72, 70, 197, 0.75)
+  text-shadow: 0 0 15px rgba(244, 243, 255, 0.75)
 }
+
  @font-face{
    font-family: "montserrat";
    src:url("assets/fonts/Montserrat-VariableFont_wght.ttf") format("truetype");
@@ -218,6 +221,11 @@ h2{
   background: radial-gradient(circle, rgb(200, 208, 252) 13px, transparent 10px);
 }
 
+.wrong{
+  background: radial-gradient(circle, rgb(11, 1, 99) 13px, transparent 10px);
+}
+
+
 #fretboard>div{
   transition: opacity 0.5 ease;
 }
@@ -240,6 +248,7 @@ h2{
 
 #highscore{
   position: relative;
+  align-self: flex-end;
 }
 
 #selectednote{
@@ -251,13 +260,14 @@ h2{
 }
 
 #randomnotedisplay{
-  position: absolute;
-    top: 0;
+     position: absolute;
+    top: 15px;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
     text-align: center;
     font-size: 25;
+    color:#E9E8FF
 }
 
 #gamemodearea{

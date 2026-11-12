@@ -3,6 +3,7 @@ let fretboard =  document.getElementById("fretboard")
 console.log(fretboard);
 let note = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 let string = ["E", "B", "G", "D", "A", "E"]
+let highscore=Number(localStorage.getItem("fretshighscore")) || 0;
 
 /*
 for(let i=0;i<6;i++){
@@ -44,6 +45,7 @@ fretboard.innerHTML = fretboardmatrixhtml;
 let selectednote =  document.getElementById("selectednote")
 let clickednote;
 
+let usednotepositions = [];
 function clickednoteonfretboard(event){
     if (gamestarted==false)
         return;
@@ -62,9 +64,13 @@ function clickednoteonfretboard(event){
     event.target.textContent = clickednote;
     event.target.classList.add("selected");}
 
+     if(!checkanswer(clickednote)){
+        event.target.classList.add("wrong");
+     }
+
     if (checkanswer(clickednote)){
-        selectednote.innerHTML = fretboardmatrix[clickedstring][clickedfret] + " string " + string[clickedstring] + " fret " + clickedfret;
-        showmessage("Right")
+        selectednote.innerHTML = fretboardmatrix[clickedstring][clickedfret] + " String " + string[clickedstring] + "<br>Fret " + clickedfret;
+        showmessage("RIGHT")
         setTimeout(function(){answer.innerHTML="";}, dissapeardelay);
         setTimeout(function(){selectednote.innerHTML="";}, dissapeardelay);
         score++;
@@ -73,20 +79,22 @@ function clickednoteonfretboard(event){
     }
         else{
         selectednote.innerHTML = fretboardmatrix[clickedstring][clickedfret] + " string " + string[clickedstring] + " fret " + clickedfret;
-        showmessage("Wrong")
+        showmessage("WRONG")
         setTimeout(function(){answer.innerHTML="";}, dissapeardelay);
         if(score>highscore){
         highscore=score;
-        highscoredisplay.innerHTML='Your best score was: <span style="color: white">' + highscore + '</span>';}
+        localStorage.setItem("fretshighscore", highscore);
+        }
+        highscoredisplay.innerHTML='Your best score was: <span style="color: white">' + highscore + '</span>';
         score=0;
         usednotepositions=[];
         setTimeout(function(){
         resetfretboard();
         randomnotedisplay.style.display="none";
         selectednote.innerHTML="";
-        scoredisplay.innerHTML="";
         startbutton.disabled=false;
         },dissapeardelay);
+        scoredisplay.innerHTML="Current score: " + score + "<br><span style='color:white'>Get better :P</span>";
         gamestarted=false;
         return;
 }}
@@ -101,13 +109,15 @@ fretboard.addEventListener("click",clickednoteonfretboard);
 let scoredisplay = document.getElementById("score")
 let score = 0;
 let highscoredisplay = document.getElementById("highscore")
-let highscore=0;
+highscoredisplay.innerHTML='Your best score was: <span style="color: white">' + highscore + '</span>';
+
 
 function resetfretboard(event){
     let allnotes=fretboard.querySelectorAll("div[data-fret]");
     for(let note of allnotes){
         note.textContent="";
-        note.classList.remove("selected");}
+        note.classList.remove("selected");
+        note.classList.remove("wrong");}
 }
 
 /*
