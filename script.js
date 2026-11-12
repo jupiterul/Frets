@@ -182,5 +182,3 @@ for(let i=0;i<dottedfrets.length;i++){
         dot1.style.gridColumn=dottedfrets[i]+1;
     }
 }
-
-
